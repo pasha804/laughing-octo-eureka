@@ -1,0 +1,14 @@
+[project]
+name = "nexus-core-auth"
+version = "0.1.0"
+description = "Microservice for OAuth 2.0 Token Verification & Credit Management"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+pythonpath = ["."]
+addopts = "-v"
