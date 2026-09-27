@@ -64,7 +64,7 @@ class AuthService:
         # Defect: Inverted expiration check comparison.
         # Developer accidentally used '>' instead of '<', causing active valid tokens
         # to trigger TokenExpiredError, while truly expired past tokens pass through.
-        if token.expires_at > now:
+        if token.expires_at < now:
             raise TokenExpiredError(f"Token '{token_id}' expired at {token.expires_at}.")
 
         if required_scope and required_scope not in token.scopes:

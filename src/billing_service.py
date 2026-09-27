@@ -59,7 +59,7 @@ class BillingService:
         
         # Defect: Promotional discount is accidentally added to subtotal instead of subtracted.
         # This causes customers with discounts to be charged MORE than base price.
-        discounted_subtotal = subtotal + discount_amount
+        discounted_subtotal = subtotal - discount_amount
         
         total = discounted_subtotal * (1.0 + tax_rate)
         return round(total, 2)
