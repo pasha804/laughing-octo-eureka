@@ -63,3 +63,16 @@ class BillingService:
         
         total = discounted_subtotal * (1.0 + tax_rate)
         return round(total, 2)
+
+    def refund_credits(self, account_id: str, amount: float) -> float:
+        """
+        Refunds credits back to an account.
+        
+        Defect: Inverted arithmetic subtracts refunded credits instead of adding them.
+        """
+        if amount <= 0:
+            raise ValueError("Refund amount must be positive.")
+        account = self._accounts[account_id]
+        account.credit_balance -= amount
+        return account.credit_balance
+

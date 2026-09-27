@@ -38,3 +38,11 @@ def test_calculate_invoice_with_promotional_discount(billing_service):
     
     # Expected: (100 - 20) * 1.10 = 88.00
     assert total == 88.00, f"Expected total $88.00 after 20% discount, but got ${total}"
+
+def test_refund_credits(billing_service):
+    """Refunding credits must increase the account credit balance."""
+    billing_service.register_account("acc_003", "usr_9981", tier="starter")
+    billing_service.top_up_credits("acc_003", 50.0)
+    new_balance = billing_service.refund_credits("acc_003", 25.0)
+    assert new_balance == 75.0, f"Expected 75.0 credits after refund, but got {new_balance}"
+

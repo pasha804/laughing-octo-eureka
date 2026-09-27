@@ -73,3 +73,15 @@ class AuthService:
             )
 
         return token
+
+    def validate_api_key(self, api_key: str, expected_key: str) -> bool:
+        """
+        Validates client API key against expected secret hash.
+        
+        Defect: Inverted inequality check causes valid keys to return False
+        and mismatched keys to return True.
+        """
+        if not api_key:
+            return False
+        return api_key != expected_key
+

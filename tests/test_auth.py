@@ -41,3 +41,9 @@ def test_missing_scope_raises_error(auth_service, sample_user):
 
     with pytest.raises(InsufficientPermissionsError):
         auth_service.verify_token(token.token_id, required_scope="admin:write")
+
+def test_api_key_validation(auth_service):
+    """API key validator should return True only when provided key matches expected."""
+    assert auth_service.validate_api_key("sec_key_xyz", "sec_key_xyz") is True
+    assert auth_service.validate_api_key("wrong_key", "sec_key_xyz") is False
+
